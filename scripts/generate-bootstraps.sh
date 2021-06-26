@@ -6,6 +6,10 @@ cd ../external/proot/
 
 ./build.sh
 
+echo "Building minitar..."
+cd ../minitar
+./build.sh
+
 cd $SCRIPTS_PATH
 mkdir -p build
 cd build
@@ -46,14 +50,21 @@ build_bootstrap () {
 		;;
 	esac
 	cd root-$PROOT_ARCH
+	cp ../../../external/minitar/build/libs/$ANDROID_ARCH/minitar root/bin/minitar
 
-  rm -rf bootstrap
-  sudo debootstrap --foreign --arch=$1 stable bootstrap
+	# separate binaries for platforms < android 5 not supporting 64bit
+	if [[ "$1" == "armhf" || "$1" == "i386" ]]; then
+		cp -r ../root-${PROOT_ARCH}-pre5/root root-pre5
+		cp root/bin/minitar root-pre5/bin/minitar
+	fi
+
+  rm -rf bootstrap bootstrap.tar
+  sudo debootstrap --foreign --make-tarball=bootstrap.tar --arch=$1 stable bootstrap
 	cp ../../run-bootstrap.sh .
 	cp ../../install-bootstrap.sh .
 	cp ../../add-user.sh .
 	cp ../build-ioctl/ioctlHook-${MUSL_ARCH}.so ioctlHook.so
-	zip -r bootstrap-$PROOT_ARCH.zip root ioctlHook.so root-pre5 bootstrap run-bootstrap.sh install-bootstrap.sh add-user.sh
+	zip -r bootstrap-$PROOT_ARCH.zip root ioctlHook.so root-pre5 bootstrap.tar run-bootstrap.sh install-bootstrap.sh add-user.sh
 	mv bootstrap-$PROOT_ARCH.zip ../
 	echo "Packed bootstrap $1"
 	cd ..
