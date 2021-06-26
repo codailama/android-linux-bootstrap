@@ -48,7 +48,7 @@ build_bootstrap () {
 	cd root-$PROOT_ARCH
 
   rm -rf bootstrap
-  debootstrap --foreign --arch=$1 stable bootstrap
+  sudo debootstrap --foreign --arch=$1 stable bootstrap
 	cp ../../run-bootstrap.sh .
 	cp ../../install-bootstrap.sh .
 	cp ../../add-user.sh .
