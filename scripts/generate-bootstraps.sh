@@ -60,7 +60,7 @@ build_bootstrap () {
 
   rm -rf bootstrap bootstrap.tar
   sudo debootstrap --foreign --arch=$1 stable bootstrap
-  tar -zcvf bootstrap.tar bootstrap
+  sudo tar -cvf bootstrap.tar bootstrap
 
 	cp ../../run-bootstrap.sh .
 	cp ../../install-bootstrap.sh .
