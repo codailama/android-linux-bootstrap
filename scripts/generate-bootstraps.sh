@@ -15,7 +15,7 @@ mkdir -p build
 cd build
 rm -rf *
 cp ../ioctlHook.c .
-../build-ioctl-hook.sh
+#../build-ioctl-hook.sh
 
 cp -r ../../external/proot/build/* .
 
@@ -64,8 +64,8 @@ build_bootstrap () {
 	cp ../../run-bootstrap.sh .
 	cp ../../install-bootstrap.sh .
 	cp ../../add-user.sh .
-	cp ../build-ioctl/ioctlHook-${MUSL_ARCH}.so ioctlHook.so
-	zip -r bootstrap-$PROOT_ARCH.zip root ioctlHook.so root-pre5 rootfs.tar.gz run-bootstrap.sh install-bootstrap.sh add-user.sh
+	cp ../../ioctlHook.c .
+	zip -r bootstrap-$PROOT_ARCH.zip root ioctlHook.c root-pre5 rootfs.tar.gz run-bootstrap.sh install-bootstrap.sh add-user.sh
 	mv bootstrap-$PROOT_ARCH.zip ../
 	echo "Packed bootstrap $1"
 	cd ..
