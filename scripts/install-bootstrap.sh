@@ -3,7 +3,7 @@
 # unpack debian bootstrap
 mkdir bootstrap
 cd bootstrap
-cat ../bootstrap.tar | ../root/bin/minitar
+cat ../rootfs.tar.gz | ../root/bin/minitar
 cd ..
 
 # include resolv.conf
