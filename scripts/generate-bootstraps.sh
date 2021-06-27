@@ -59,7 +59,7 @@ build_bootstrap () {
 	fi
 
   rm -rf rootfs.tar.gz
-  curl -o rootfs.tar.gz -L "http://cdimage.ubuntu.com/ubuntu-base/releases/18.04/release/ubuntu-base-18.04.5-base-$1.tar.gz"
+  curl -o rootfs.tar.gz -L "http://cdimage.ubuntu.com/ubuntu-base/releases/20.04/release/ubuntu-base-20.04.2-base-$1.tar.gz"
 
 	cp ../../run-bootstrap.sh .
 	cp ../../install-bootstrap.sh .
@@ -74,4 +74,4 @@ build_bootstrap () {
 build_bootstrap arm64
 build_bootstrap armhf
 build_bootstrap amd64
-build_bootstrap i386
+#build_bootstrap i386
