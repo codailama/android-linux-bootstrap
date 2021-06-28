@@ -33,4 +33,20 @@ export PATH
 export USER
 export HOME
 shift
-./root/bin/proot -r bootstrap $OP -b /dev -b /proc -b /sys -b /system -b /vendor -b /storage $EXTRA_BIND --link2symlink -p -L -w $HOME "$@"
+./root/bin/proot \
+    -r bootstrap $OP \
+    -b /dev \
+    -b /proc \
+    -b /sys \
+    -b /system \
+    -b /vendor \
+    -b /storage \
+    $EXTRA_BIND \
+    --link2symlink \
+    -p -L \
+     -w $HOME \
+     /usr/bin/env \
+     PATH=$PATH \
+     USER=$USER \
+     HOME=$HOME \
+    "$@"
